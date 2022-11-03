@@ -24,16 +24,20 @@ async function example() {
 
         await driver.get('https://tienda.comercialvera.eu/es/3-carne?page=' + i);
 
-        let restaurants_links = await driver.findElements(By.xpath("//article[@contains= ]"));
+        let restaurants_links = await driver.findElements(By.xpath("//h3[@class='h3 product-title']/a"));
 
         let restaurants_hrefs = [];
-
+        // Aqui hacemos un blucle para meter dentro del array los productos
         for ( let restaurant_link of restaurants_links ) {
             
             restaurants_hrefs.push(await restaurant_link.getAttribute('href'));
         }
 
+        // y en este bucle lo usamos para para meternos y salir de cada producto
+        for( let restaurant_href of restaurants_hrefs ) {
 
+            await driver.get(restaurant_href);
+        }
         
     }
 }
