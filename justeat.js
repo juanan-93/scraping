@@ -16,7 +16,8 @@ async function example() {
     for (let postal_code of postal_codes) {
 
         await driver.get('https://www.just-eat.es/area/'+ postal_code +'-palma');
-       
+       //el then  significa que pase una cosa se ejecute los que va dentro de los corchetes en este caso await driver.wait(until.elementLocated(By.xpath("//a[@data-test-id='restaurant']")), 10000) 
+       //seguidos del thenthen( async () => {que suceda el codigo escrito aqui}
         await driver.wait(until.elementLocated(By.xpath("//a[@data-test-id='restaurant']")), 10000).then( async () => {
 
             let scrollHeight = await driver.executeScript("return document.body.scrollHeight");
