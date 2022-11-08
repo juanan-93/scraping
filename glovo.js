@@ -91,6 +91,7 @@ async function example() {
            
                     let dishName = await dishElement.findElement(By.xpath(".//div[@class='product-row__name']/span/span")).getText();
                     let dishprice = await dishElement.findElement(By.xpath(".//span[@class='product-price__effective product-price__effective--new-card']")).getText();
+                    //la funcion split convierte texto en una array, entre parentesis y las comillas le ponemos donde va ir la separacion para hacer una array.
                     dishprice = dishprice.split(" ")[0].replace(",", ".");
                    
                     let extractData = ",Glovo," + restaurantName + ","  + serviceFee + "," + minimumPayment + "," + minimumPaymentFee + "," + dishName + "," + dishprice + "," + date + "\n";
