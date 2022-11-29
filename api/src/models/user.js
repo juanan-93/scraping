@@ -1,47 +1,28 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('Branch', {
+    return sequelize.define('User', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        business_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'businesses',
-                key: 'id'
-            }
-        },
-        trade_name: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        address: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        location: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        phone: {
+        name: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
         email: {
             type: DataTypes.STRING(255),
-            allowNull: false
+            allowNull: false,
+            unique: "email"
         },
-        web: {
+        password: {
             type: DataTypes.STRING(255),
             allowNull: false
         }
     }, {
         sequelize,
-        tableName: 'branches',
+        tableName: 'users',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -54,10 +35,11 @@ module.exports = function(sequelize, DataTypes) {
                 ]
             },
             {
-                name: "business_id",
+                name: "email",
+                unique: true,
                 using: "BTREE",
                 fields: [
-                    { name: "business_id" },
+                    { name: "email" },
                 ]
             },
         ]

@@ -1,47 +1,51 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('Branch', {
+    return sequelize.define('LocaleSlugSeo', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        business_id: {
+        localeSeold: {
             type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'businesses',
-                key: 'id'
-            }
+            allowNull: true
         },
-        trade_name: {
+        language: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        relParent: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        address: {
+        slug: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        location: {
-            type: DataTypes.STRING(255),
-            allowNull: false
+        key: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         },
-        phone: {
+        parentSlug: {
             type: DataTypes.STRING(255),
-            allowNull: false
+            allowNull: true
         },
-        email: {
+        title: {
             type: DataTypes.STRING(255),
-            allowNull: false
+            allowNull: true
         },
-        web: {
+        keyWords: {
             type: DataTypes.STRING(255),
-            allowNull: false
+            allowNull: true
+        },
+        description: {
+            type: DataTypes.STRING(255),
+            allowNull: true
         }
     }, {
         sequelize,
-        tableName: 'branches',
+        tableName: 'locale_slug_seo',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -51,13 +55,6 @@ module.exports = function(sequelize, DataTypes) {
                 using: "BTREE",
                 fields: [
                     { name: "id" },
-                ]
-            },
-            {
-                name: "business_id",
-                using: "BTREE",
-                fields: [
-                    { name: "business_id" },
                 ]
             },
         ]

@@ -1,47 +1,71 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('Branch', {
+    return sequelize.define('LocaleSeo', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        business_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'businesses',
-                key: 'id'
-            }
-        },
-        trade_name: {
+        title: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        address: {
+        rel_parent: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        location: {
+        language: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        phone: {
+        group: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        email: {
+        key: {
             type: DataTypes.STRING(255),
             allowNull: false
         },
-        web: {
+        subdomain: {
             type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        url: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        keywords: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        description: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        redirection: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        menu: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        changefreq: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        priority: {
+            type: DataTypes.DECIMAL(10,0),
+            allowNull: true
+        },
+        sitemap: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
         }
     }, {
         sequelize,
-        tableName: 'branches',
+        tableName: 'locale_seo',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -51,13 +75,6 @@ module.exports = function(sequelize, DataTypes) {
                 using: "BTREE",
                 fields: [
                     { name: "id" },
-                ]
-            },
-            {
-                name: "business_id",
-                using: "BTREE",
-                fields: [
-                    { name: "business_id" },
                 ]
             },
         ]

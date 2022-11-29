@@ -1,39 +1,67 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('Order', {
+    return sequelize.define('MenuItem', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        worker_id: {
+        language: {
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
+        menuId: {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'workers',
+                model: 'menu_items',
                 key: 'id'
             }
         },
-        client_id: {
+        localeSeoId: {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'clients',
+                model: 'menu_items',
                 key: 'id'
             }
         },
-        table_id: {
+        localeSlugId: {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'tables',
+                model: 'menu_items',
                 key: 'id'
             }
+        },
+        parentKey: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        name: {
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        customUrl: {
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
+        private: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        order: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     }, {
         sequelize,
-        tableName: 'orders',
+        tableName: 'menu_items',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -46,24 +74,24 @@ module.exports = function(sequelize, DataTypes) {
                 ]
             },
             {
-                name: "worker_id",
+                name: "menuId",
                 using: "BTREE",
                 fields: [
-                    { name: "worker_id" },
+                    { name: "menuId" },
                 ]
             },
             {
-                name: "client_id",
+                name: "localeSeoId",
                 using: "BTREE",
                 fields: [
-                    { name: "client_id" },
+                    { name: "localeSeoId" },
                 ]
             },
             {
-                name: "table_id",
+                name: "localeSlugId",
                 using: "BTREE",
                 fields: [
-                    { name: "table_id" },
+                    { name: "localeSlugId" },
                 ]
             },
         ]
